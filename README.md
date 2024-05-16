@@ -13,3 +13,9 @@ journalctl --since "1 hour ago" -u rbuilder -o cat | grep  "\"relay\":\"ultrasou
 
 # Example for compare_winenr.py
 ```python compare_winner.py 0xa1aa1ad4f2ad89f3cd2da667259022763ce7d22f75582fc824cd6cc8c56a89edb6a922e64ab95666f4bdeb2c309052ef```
+
+# Example for analyse_slot.py
+```python3 analyse_slot.py 0xa1aa1ad4f2ad89f3cd2da667259022763ce7d22f75582fc824cd6cc8c56a89edb6a922e64ab95666f4bdeb2c309052ef 9085513```
+
+You can also optionally pass a base url to specify which relay you want to fetch the data from.
+This script will internal call the ```fetch_slot_data.py```. It will fetch the data and put them into the folder ```slot_data``` to be later used in the analysis.

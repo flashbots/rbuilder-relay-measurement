@@ -15,6 +15,8 @@ def fetch_slot_data(base_url, slot):
     winner_url = f"{base_url}/relay/v1/data/bidtraces/proposer_payload_delivered"
     winner_response = requests.get(winner_url, params=params)
     winner_data = winner_response.json()
+    if not winner_data:
+        return data, {}
     # Fetch the winner's full data
     winner_full_data_url = f"{base_url}/relay/v1/data/bidtraces/builder_blocks_received"
     winner_full_data_params = {
@@ -24,7 +26,6 @@ def fetch_slot_data(base_url, slot):
     }
     winner_full_data_response = requests.get(winner_full_data_url, params=winner_full_data_params)
     winner_full_data = winner_full_data_response.json()
-
     return data, winner_full_data
 
 def store_slot_data(slot, data, winner_full_data):
