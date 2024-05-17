@@ -6,29 +6,20 @@ import consts
 import fetch_slot_data
 
 def compare_data(builder_pubkey, slot, base_url=None):
-    data_file = os.path.join(consts.SLOTS_DATA_PATH, f'{slot}.json')
-    winner_file = os.path.join(consts.SLOTS_DATA_PATH, f'{slot}_bid_winner.json')
-
-    if not os.path.exists(data_file) or not os.path.exists(winner_file):
-        if base_url is None:
-            fetch_slot_data.main(slot)
-        else:
-            fetch_slot_data.main(slot, base_url)
-
-    with open(data_file, 'r') as f:
-        data = json.load(f)
-
+    if base_url is None:
+        data, winner_full_data = fetch_slot_data.fetch(slot)
+    else:
+        data, winner_full_data = fetch_slot_data.fetch(slot, base_url)
+    
     if not data:
         print(f"No submissions/bids found for slot {slot}")
         return
     
-    with open(winner_file, 'r') as f:
-        winner_full_data = json.load(f)
-        if winner_full_data:
-            winner_full_data = winner_full_data[0]
-        else:
-            print("No bids won in this slot from this relay")
-            return
+    if winner_full_data:
+        winner_full_data = winner_full_data[0]
+    else:
+        print("No bids won in this slot from this relay")
+        return
 
     if winner_full_data['builder_pubkey'] == builder_pubkey:
         print("Your bid won in this slot!")

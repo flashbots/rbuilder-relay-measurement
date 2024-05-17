@@ -17,7 +17,7 @@ DEFAULT_RELAY = consts.URL_FLASHBOTS
 
 def check_flashbots_submissions(slot, relay, flashbots_builders_bids_submitted_overall):
     print(f"\nfetching data for slot {slot} ...")
-    data, winner = fetch_slot_data.fetch_slot_data(relay, slot)
+    data = fetch_slot_data.fetch_slot_data(relay, slot)
 
     flashbots_builders_bids_submitted = defaultdict(int)
 
