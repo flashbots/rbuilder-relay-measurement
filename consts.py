@@ -1,5 +1,8 @@
+import os
+
 URL_ULTRASOUND = "https://relay-analytics.ultrasound.money"
 URL_FLASHBOTS = "https://boost-relay.flashbots.net"
+SLOTS_DATA_PATH = os.path.join(os.path.dirname(__file__), "slots_data")
 
 FLASHBOTS_BUILDERS = {
     "plain": [

@@ -2,16 +2,18 @@ import argparse
 import subprocess
 import json
 import os
+import consts
+import fetch_slot_data
 
 def compare_data(builder_pubkey, slot, base_url=None):
-    data_file = os.path.join('slots_data', f'{slot}.json')
-    winner_file = os.path.join('slots_data', f'{slot}_bid_winner.json')
+    data_file = os.path.join(consts.SLOTS_DATA_PATH, f'{slot}.json')
+    winner_file = os.path.join(consts.SLOTS_DATA_PATH, f'{slot}_bid_winner.json')
 
     if not os.path.exists(data_file) or not os.path.exists(winner_file):
-        command = ['python3', 'fetch_slot_data.py', str(slot)]
-        if base_url:
-            command.extend(['--base-url', base_url])
-        subprocess.run(command)
+        if base_url is None:
+            fetch_slot_data.main(slot)
+        else:
+            fetch_slot_data.main(slot, base_url)
 
     with open(data_file, 'r') as f:
         data = json.load(f)
