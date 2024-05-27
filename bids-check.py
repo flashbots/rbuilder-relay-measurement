@@ -12,7 +12,8 @@ Example output: https://gist.github.com/metachris/71c1c9a4b0f23713be283ad91f33a5
 
 DEFAULT_NUM_SLOTS = 50
 DEFAULT_START_SLOT = 0  # latest
-DEFAULT_RELAY = consts.URL_FLASHBOTS
+# DEFAULT_RELAY = consts.URL_FLASHBOTS
+DEFAULT_RELAY = consts.URL_ULTRASOUND
 
 
 def check_flashbots_submissions(slot, relay, flashbots_builders_bids_submitted_overall):
