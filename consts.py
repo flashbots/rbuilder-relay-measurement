@@ -1,8 +1,9 @@
 import os
 
+SLOTS_DATA_PATH = os.path.join(os.path.dirname(__file__), "slots_data")
+
 URL_ULTRASOUND = "https://relay-analytics.ultrasound.money"
 URL_FLASHBOTS = "https://boost-relay.flashbots.net"
-SLOTS_DATA_PATH = os.path.join(os.path.dirname(__file__), "slots_data")
 
 FLASHBOTS_BUILDERS = {
     "plain": [
@@ -26,4 +27,14 @@ FLASHBOTS_BUILDERS = {
     "sgx": [
         "0x8d333ca548a12676c93dc12cbe650fdfd62284b85f0a60cf68fb33ece035aea18fc1df0057cbe085db0dc593c47b8f4a",
     ],
+}
+
+RELAYS = {
+    "ultrasound": URL_ULTRASOUND,
+    "flashbots": URL_FLASHBOTS,
+    "bloxroute": "https://0x8b5d2e73e2a3a55c6c87b8b6eb92e0149a125c852751db1422fa951e42a09b82c142c3ea98d0d9930b056a3bc9896b8f@bloxroute.max-profit.blxrbdn.com",
+    "agnostic": "https://0xa7ab7a996c8584251c8f925da3170bdfd6ebc75d50f5ddc4050a6fdc77f2a3b5fce2cc750d0865e05d7228af97d69561@agnostic-relay.net",
+    "eden": "https://0xb3ee7afcf27f1f1259ac1787876318c6584ee353097a50ed84f51a1f21a323b3736f271a895c7ce918c038e4265918be@relay.edennetwork.io",
+    "aestus": "https://0xa15b52576bcbf1072f4a011c0f99f9fb6c66f3e1ff321f11f461d15e31b1cb359caa092c71bbded0bae5b5ea401aab7e@aestus.live",
+    "titan": "https://0x8c4ed5e24fe5c6ae21018437bde147693f68cda427cd1122cf20819c30eda7ed74f72dece09bb313f2a1855595ab677d@titanrelay.xyz",
 }
