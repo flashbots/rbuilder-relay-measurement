@@ -16,9 +16,14 @@ DEFAULT_START_SLOT = 0  # latest
 DEFAULT_RELAY = consts.URL_ULTRASOUND
 
 
-def check_flashbots_submissions(slot, relay, flashbots_builders_bids_submitted_overall):
+def check_flashbots_submissions(
+    slot,
+    relay,
+    flashbots_builders_bids_submitted_overall,
+    flashbots_builders_bids_slots_overall,
+):
     print(f"\nfetching data for slot {slot} ...")
-    data = fetch_slot_data.fetch_slot_data(relay, slot)
+    data = fetch_slot_data.fetch_slot_data(relay, slot, use_cache=False)
 
     flashbots_builders_bids_submitted = defaultdict(int)
 
@@ -31,6 +36,8 @@ def check_flashbots_submissions(slot, relay, flashbots_builders_bids_submitted_o
 
     for builder, count in flashbots_builders_bids_submitted.items():
         print(f"- {builder} submitted {count} bids")
+        if len(data) > 0:
+            flashbots_builders_bids_slots_overall[builder] += 1
 
 
 def main(num_slots: int, relay: str, start_slot: int):
@@ -39,10 +46,14 @@ def main(num_slots: int, relay: str, start_slot: int):
     )
 
     flashbots_builders_bids_submitted_overall = defaultdict(int)
+    flashbots_builders_bids_slots_overall = defaultdict(int)
 
     for i in range(num_slots):
         check_flashbots_submissions(
-            start_slot - i, relay, flashbots_builders_bids_submitted_overall
+            start_slot - i,
+            relay,
+            flashbots_builders_bids_submitted_overall,
+            flashbots_builders_bids_slots_overall,
         )
 
     print()
@@ -57,7 +68,9 @@ def main(num_slots: int, relay: str, start_slot: int):
         reverse=False,
     )
     for builder, count in items_sorted:
-        print(f"- {builder} submitted {count} bids")
+        print(
+            f"- {builder} \t bids: {count:>4} \t slots: {flashbots_builders_bids_slots_overall[builder]:>4}"
+        )
 
 
 if __name__ == "__main__":

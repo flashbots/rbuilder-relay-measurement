@@ -40,11 +40,11 @@ def fetch_winner_data(base_url, slot):
     return winner_full_data
 
 
-def fetch_slot_data(base_url, slot):
+def fetch_slot_data(base_url, slot, use_cache=True):
 
     # Check if the slot data already exists
     slot_data_path = os.path.join(consts.SLOTS_DATA_PATH, f"{slot}.json")
-    if os.path.exists(slot_data_path):
+    if use_cache and os.path.exists(slot_data_path):
         with open(slot_data_path, "r") as f:
             data = json.load(f)
         return data
@@ -56,8 +56,9 @@ def fetch_slot_data(base_url, slot):
     data = response.json()
 
     # Store the fetched data
-    with open(slot_data_path, "w") as f:
-        json.dump(data, f)
+    if use_cache:
+        with open(slot_data_path, "w") as f:
+            json.dump(data, f)
 
     return data
 
