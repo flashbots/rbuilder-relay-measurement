@@ -161,3 +161,4 @@ cython_debug/
 #.idea/
 /slots_data/
 /wins.txt
+/logs*
